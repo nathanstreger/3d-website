@@ -1,14 +1,23 @@
-import './style.css';
-import * as THREE from 'three';
+import "./style.css";
+import * as THREE from "three";
+import moonUrl from "./images/moon.jpg";
+import nathanUrl from "./images/nathan.jpg";
+import spaceUrl from "./images/space.jpg";
+import normalUrl from "./images/normal.jpg";
 
 // Setup
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
+  canvas: document.querySelector("#bg"),
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -50,27 +59,30 @@ const addStar = () => {
   star.position.set(x, y, z);
   Stars.push(star);
   scene.add(star);
-}
+};
 
 Array(200).fill().forEach(addStar);
 
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load('space.jpg');
+const spaceTexture = new THREE.TextureLoader().load(spaceUrl);
 scene.background = spaceTexture;
 
 // Avatar
 
-const NathanTexture = new THREE.TextureLoader().load('nathan.jpg');
+const NathanTexture = new THREE.TextureLoader().load(nathanUrl);
 
-const Nathan = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: NathanTexture }));
+const Nathan = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3),
+  new THREE.MeshBasicMaterial({ map: NathanTexture })
+);
 
 scene.add(Nathan);
 
 // Moon
 
-const moonTexture = new THREE.TextureLoader().load('moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('normal.jpg');
+const moonTexture = new THREE.TextureLoader().load(moonUrl);
+const normalTexture = new THREE.TextureLoader().load(normalUrl);
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
@@ -96,13 +108,13 @@ const moveCamera = () => {
   moon.rotation.y += 0.0075;
   moon.rotation.z += 0.005;
 
-  Nathan.rotation.y = t * - 0.001;
-  Nathan.rotation.z = t * - 0.001;
+  Nathan.rotation.y = t * -0.001;
+  Nathan.rotation.z = t * -0.001;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
-}
+};
 
 document.body.onscroll = moveCamera;
 moveCamera();
@@ -119,6 +131,6 @@ const animate = () => {
   moon.rotation.x += 0.005;
 
   renderer.render(scene, camera);
-}
+};
 
 animate();
