@@ -7,7 +7,12 @@ import normalUrl from "./images/normal.jpg";
 
 // Setup
 
+const fSmallScreen = window.innerWidth < 900;
 const scene = new THREE.Scene();
+
+const initalCameraPositionX = fSmallScreen ? 2.0 : 0;
+const initalCameraPositionY = fSmallScreen ? -1.5 : 0;
+const initalCameraPositionZ = fSmallScreen ? 0 : 0;
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -22,8 +27,8 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
-camera.position.setX(-3);
+
+camera.position.setY(initalCameraPositionY);
 
 renderer.render(scene, camera);
 
@@ -111,8 +116,8 @@ const moveCamera = () => {
   Nathan.rotation.y = t * -0.001;
   Nathan.rotation.z = t * -0.001;
 
-  camera.position.z = t * -0.01;
-  camera.position.x = t * -0.0002;
+  camera.position.z = initalCameraPositionZ + t * -0.01;
+  camera.position.x = initalCameraPositionX + t * -0.0002;
   camera.rotation.y = t * -0.0002;
 };
 
@@ -134,3 +139,5 @@ const animate = () => {
 };
 
 animate();
+
+console.log(camera.position);
