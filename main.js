@@ -42,19 +42,20 @@ scene.add(torus);
 
 // Lights
 
+//point light adds inner torus brightness
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5, 5, 5);
 
+//ambient light to light up the whole scene
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 // Stars
-
 const Stars = [];
 
 const addStar = () => {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-  const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+  const material = new THREE.PointsMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
 
   const [x, y, z] = Array(3)
@@ -66,7 +67,7 @@ const addStar = () => {
   scene.add(star);
 };
 
-Array(200).fill().forEach(addStar);
+Array(100).fill().forEach(addStar);
 
 // Background
 
