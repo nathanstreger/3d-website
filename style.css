@@ -4,6 +4,7 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  min-height: 100vh;
 }
 
 :root {
@@ -19,6 +20,7 @@ canvas {
 @media (max-width: 900px) {
   html {
     font-size: 12px;
+    min-height: 100vh;
   }
   header {
     grid-column: var(--smallscreen-grid-columns) !important;

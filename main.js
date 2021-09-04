@@ -16,7 +16,7 @@ const initalCameraPositionZ = fSmallScreen ? 0 : 0;
 
 const camera = new THREE.PerspectiveCamera(
   75,
-  window.innerWidth / window.innerHeight,
+  window.innerWidth / (fSmallScreen ? window.outerHeight : window.innerHeight),
   0.1,
   1000
 );
@@ -79,7 +79,9 @@ scene.background = spaceTexture;
 const NathanTexture = new THREE.TextureLoader().load(nathanUrl);
 
 const Nathan = new THREE.Mesh(
-  new THREE.BoxGeometry(3, 3, 3),
+  fSmallScreen
+    ? new THREE.BoxGeometry(2, 2, 2)
+    : new THREE.BoxGeometry(3, 3, 3),
   new THREE.MeshBasicMaterial({ map: NathanTexture })
 );
 
