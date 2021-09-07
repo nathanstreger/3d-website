@@ -142,5 +142,3 @@ const animate = () => {
 };
 
 animate();
-
-console.log(camera.position);
